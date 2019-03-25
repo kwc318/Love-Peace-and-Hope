@@ -10,6 +10,7 @@ public class Restart : MonoBehaviour
     public float timer;
     public GameObject bg;
     public Button start;
+    public GameObject musicplayer;
 
     
     // Start is called before the first frame update
@@ -39,5 +40,12 @@ public class Restart : MonoBehaviour
     {
         Debug.Log("play");
         SceneManager.LoadScene(sceneName:"Gameplay");
+    }
+    
+    public void ChangeSceneinstructions()
+    {
+        Debug.Log("instructions");
+        SceneManager.LoadScene(sceneName:"Instructions");
+        DontDestroyOnLoad(musicplayer);
     }
 }

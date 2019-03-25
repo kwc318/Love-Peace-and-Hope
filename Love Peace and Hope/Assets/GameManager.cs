@@ -6,6 +6,7 @@ using EZCameraShake;
 using TMPro;
 using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public int p2score;
     public TextMeshProUGUI p1s;
     public TextMeshProUGUI p2s;
+    public TextMeshProUGUI Ctext;
     public int scorelength;
     public GameObject p1flash;
     public GameObject p2flash;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     public AudioClip fifth;
     public AudioClip sixth;
     public AudioClip seventh;
+    public bool win;
 
 
 
@@ -54,6 +57,10 @@ public class GameManager : MonoBehaviour
         }
 
         AudioClip bop = whoop.clip;
+
+        win = false;
+        
+        Destroy(GameObject.Find("Music manager"));
 
 //        var trans = 0.5f;
 //        var color = p1flash.GetComponent<Renderer>().material.color;
@@ -87,7 +94,7 @@ public class GameManager : MonoBehaviour
        
        string scorep1 = p1score.ToString();
        int numZeros = scorelength - scorep1.Length;
-       Debug.Log(numZeros);
+       //Debug.Log(numZeros);
 
        string newScore = "";
        
@@ -101,7 +108,7 @@ public class GameManager : MonoBehaviour
        
        string scorep2 = p2score.ToString();
        int numZeros2 = scorelength - scorep2.Length;
-       Debug.Log(numZeros2);
+       //Debug.Log(numZeros2);
 
        string newScore2 = "";
        
@@ -113,90 +120,91 @@ public class GameManager : MonoBehaviour
        //newScore += scorep1;
        p2s.text = newScore2 + scorep2;
 
+       if (win == false)
+       {
+           if (Input.GetKeyDown(KeyCode.A))
+           {
+               Speed1 += 1;
+               p1score += 1;
+               Debug.Log(Speed1);
+               CameraShaker.Instance.ShakeOnce(force, 4f, 0.1f, 1f);
+               //p1flash.GetComponent<Renderer> ().material.color.a = 0;
+               p1flash.GetComponent<Animator>().Play("flahs");
+               whoop.Play();
+               //whoop.clip = first;
+               //playboop(first);
+           }
 
+           else
+           {
+               p1flash.GetComponent<Animator>().Play("Idle");
+           }
 
-       if (Input.GetKeyDown(KeyCode.A))
-       {
-           Speed1 += 1;
-           p1score += 1;
-           Debug.Log(Speed1);
-           CameraShaker.Instance.ShakeOnce(force, 4f, 0.1f, 1f);
-           //p1flash.GetComponent<Renderer> ().material.color.a = 0;
-           p1flash.GetComponent<Animator>().Play("flahs");
-           whoop.Play();
-           //whoop.clip = first;
-           //playboop(first);
+           if (timer <= 0)
+           {
+               rgbd1.AddForce(new Vector2(Speed1, 0), ForceMode2D.Force);
+               rgbd2.AddForce(new Vector2(-Speed2, 0), ForceMode2D.Force);
+           }
+
+           //rgbd2.AddForce(new Vector2(-Speed2,0), ForceMode2D.Force);
+
+           if (Input.GetKeyDown(KeyCode.L))
+           {
+               Speed2 += 1;
+               p2score += 1;
+               Debug.Log(Speed2);
+               CameraShaker.Instance.ShakeOnce(force, 4f, 0.1f, 1f);
+               p2flash.GetComponent<Animator>().Play("flahs");
+               whoop.Play();
+               //whoop.clip = first;
+               playboop(first);
+           }
+
+           else
+           {
+               p2flash.GetComponent<Animator>().Play("Idle");
+           }
+
+           if (p1score >= 10 || p2score >= 10)
+           {
+               force = 1;
+               //playboop(second);
+               //whoop.clip = second;
+               //whoop.Play();
+           }
+
+           if (p1score >= 30 || p2score >= 30)
+           {
+               force = 2;
+               //playboop(third);
+               //whoop.clip = third;
+           }
+
+           if (p1score >= 50 || p2score >= 50)
+           {
+               force = 4;
+               //Changeboop(fourth);
+           }
+
+           if (p1score >= 100 || p2score >= 100)
+           {
+               force = 6;
+               //Changeboop(fifth);
+           }
+
+           if (p1score >= 150 || p2score >= 150)
+           {
+               force = 8;
+               //Changeboop(sixth);
+           }
+
+           if (p1score >= 200 || p2score >= 200)
+           {
+               force = 10;
+               //Changeboop(seventh);
+           }
        }
 
-       else
-       {
-           p1flash.GetComponent<Animator>().Play("Idle");
-       }
-
-       if (timer <= 0)
-       {
-           rgbd1.AddForce(new Vector2(Speed1, 0), ForceMode2D.Force);
-           rgbd2.AddForce(new Vector2(-Speed2,0), ForceMode2D.Force);
-       }
-       
-        //rgbd2.AddForce(new Vector2(-Speed2,0), ForceMode2D.Force);
-
-       if (Input.GetKeyDown(KeyCode.L))
-       {
-           Speed2 += 1;
-           p2score += 1;
-           Debug.Log(Speed2);
-           CameraShaker.Instance.ShakeOnce(force, 4f, 0.1f, 1f);
-           p2flash.GetComponent<Animator>().Play("flahs");
-           whoop.Play();
-           //whoop.clip = first;
-           playboop(first);
-       }
-       
-       else
-       {
-           p2flash.GetComponent<Animator>().Play("Idle");
-       }
-
-       if (p1score >= 10 || p2score >= 10)
-       {
-           force = 1;
-           //playboop(second);
-           //whoop.clip = second;
-           //whoop.Play();
-       }
-       
-       if (p1score >= 30 || p2score >= 30)
-       {
-           force = 2;
-           //playboop(third);
-           //whoop.clip = third;
-       }
-       
-       if (p1score >= 50 || p2score >= 50)
-       {
-           force = 4;
-           //Changeboop(fourth);
-       }
-       
-       if (p1score >= 100 || p2score >= 100)
-       {
-           force = 6;
-           //Changeboop(fifth);
-       }
-       
-       if (p1score >= 150 || p2score >= 150)
-       {
-           force = 8;
-           //Changeboop(sixth);
-       }
-       
-       if (p1score >= 200 || p2score >= 200)
-       {
-           force = 10;
-           //Changeboop(seventh);
-       }
-       
 //       if (p1score >= 130 || p2score >= 1300)
 //       {
 //           force = 12;
@@ -207,4 +215,10 @@ public class GameManager : MonoBehaviour
 //           force = 14;
 //       }
     }
+
+    public void restart()
+    {
+        SceneManager.LoadScene(sceneName:"Gameplay");
+    }
+    
 }
