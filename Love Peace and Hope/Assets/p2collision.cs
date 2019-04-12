@@ -23,14 +23,30 @@ public class p2collision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Right Barrier")
+        if (GM.win == false)
         {
-            Debug.Log("p1 win");
-            GM.win = true;
-            GM.Ctext.text = "Player 1 wins!";
-            yay.Play();
-            GameObject rspawn = Instantiate(rsbutton, new Vector3(460, 153, 0), Quaternion.identity);
-            rspawn.transform.SetParent(canvas.transform);
+            if (collision.gameObject.name == "Right Barrier")
+            {
+                Debug.Log("p1 win");
+                GM.win = true;
+                GM.Ctext.text = "Player 1 wins!";
+                yay.Play();
+                GameObject rspawn = Instantiate(rsbutton, new Vector3(780, 200, 0), Quaternion.identity);
+                rspawn.transform.SetParent(canvas.transform);
+                GM.Speed1 = 1;
+                GM.Speed2 = 0;
+            }
         }
+//        if (collision.gameObject.name == "Right Barrier")
+//        {
+//            Debug.Log("p1 win");
+//            GM.win = true;
+//            GM.Ctext.text = "Player 1 wins!";
+//            yay.Play();
+//            GameObject rspawn = Instantiate(rsbutton, new Vector3(780, 200, 0), Quaternion.identity);
+//            rspawn.transform.SetParent(canvas.transform);
+//            GM.Speed1 = 1;
+//            GM.Speed2 = 0;
+//        }
     }
 }

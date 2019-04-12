@@ -930,9 +930,9 @@ MonoBehaviour:
 
 
     Simply press the A key (or L key for player 2) as fast as you can while you charge
-    your hug power. After a short period, both players will shoot out, and whoever
-    hugs the other player to the wall wins! Remember to constantly bush your button
-    to give an even stronger hug!'
+    your hug power. After a short period, both players will release their stored power,
+    and whoever hugs the other player to the wall wins! Remember to constantly push
+    your button to give an even stronger hug!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 735c98044057a6a40bcb9365da0bd276, type: 2}
   m_sharedMaterial: {fileID: 21594615602875652, guid: 735c98044057a6a40bcb9365da0bd276,
@@ -1002,10 +1002,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1399670557}
-    characterCount: 323
+    characterCount: 340
     spriteCount: 0
-    spaceCount: 63
-    wordCount: 63
+    spaceCount: 65
+    wordCount: 65
     linkCount: 0
     lineCount: 7
     pageCount: 1

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public Rigidbody2D rgbd2;
     public float timer;
     public GameObject blocksprefab;
+    public GameObject beachprefab;
+    public GameObject waterprefab;
     public int p1score;
     public int p2score;
     public TextMeshProUGUI p1s;
@@ -43,16 +45,22 @@ public class GameManager : MonoBehaviour
     public bool win;
 
 
-
     // Start is called before the first frame update
     void Start()
     {
         scorelength = 4;
         
-        for (int i = 0; i <= 8; i++)
+        for (int i = 0; i <= 3; i++)
 			
         {
-            Instantiate(blocksprefab, new Vector3(  -8 + i * 2, -6.0f , -2), Quaternion.identity);
+            Instantiate(beachprefab, new Vector3(  -9 + i * 8, -4f , -2), Quaternion.identity);
+            //spawn.transform.SetParent(canvas.transform);
+        }
+        
+        for (int i = 0; i <= 10; i++)
+			
+        {
+            Instantiate(waterprefab, new Vector3(  -9 + i * 1.8f, -4.65f , -3f), Quaternion.identity);
             //spawn.transform.SetParent(canvas.transform);
         }
 
@@ -119,6 +127,12 @@ public class GameManager : MonoBehaviour
 
        //newScore += scorep1;
        p2s.text = newScore2 + scorep2;
+       
+       if (timer <= 0)
+       {
+           rgbd1.AddForce(new Vector2(Speed1, 0), ForceMode2D.Force);
+           rgbd2.AddForce(new Vector2(-Speed2, 0), ForceMode2D.Force);
+       }
 
        if (win == false)
        {
@@ -140,11 +154,11 @@ public class GameManager : MonoBehaviour
                p1flash.GetComponent<Animator>().Play("Idle");
            }
 
-           if (timer <= 0)
-           {
-               rgbd1.AddForce(new Vector2(Speed1, 0), ForceMode2D.Force);
-               rgbd2.AddForce(new Vector2(-Speed2, 0), ForceMode2D.Force);
-           }
+//           if (timer <= 0)
+//           {
+//               rgbd1.AddForce(new Vector2(Speed1, 0), ForceMode2D.Force);
+//               rgbd2.AddForce(new Vector2(-Speed2, 0), ForceMode2D.Force);
+//           }
 
            //rgbd2.AddForce(new Vector2(-Speed2,0), ForceMode2D.Force);
 
