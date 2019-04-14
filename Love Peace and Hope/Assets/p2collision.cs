@@ -7,6 +7,7 @@ public class p2collision : MonoBehaviour
     public GameManager GM;
     public AudioSource yay;
     public GameObject rsbutton;
+    public Transform buttonpos;
     public Canvas canvas;
     public Sprite yellow;
     public Sprite orange;
@@ -63,7 +64,7 @@ public class p2collision : MonoBehaviour
                 GM.win = true;
                 GM.Ctext.text = p1.GetComponent<SpriteRenderer>().sprite.name.ToString() + " Has More Hug Power!";
                 yay.Play();
-                GameObject rspawn = Instantiate(rsbutton, new Vector3(780, 200, 0), Quaternion.identity);
+                GameObject rspawn = Instantiate(rsbutton, buttonpos.position, Quaternion.identity);
                 rspawn.transform.SetParent(canvas.transform);
                 GM.Speed1 = 1;
                 GM.Speed2 = 0;
