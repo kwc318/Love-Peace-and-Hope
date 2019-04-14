@@ -28,7 +28,7 @@ public class instcontrollet : MonoBehaviour
     public void ChangeSceneplay()
     {
         Debug.Log("play");
-        SceneManager.LoadScene(sceneName:"Gameplay");
+        SceneManager.LoadScene(sceneName:"Character Select");
         //DontDestroyOnLoad(musicplayer);
     }
 }

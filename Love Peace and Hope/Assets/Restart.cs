@@ -39,7 +39,9 @@ public class Restart : MonoBehaviour
     public void ChangeScene()
     {
         Debug.Log("play");
-        SceneManager.LoadScene(sceneName:"Gameplay");
+        SceneManager.LoadScene(sceneName:"Character Select");
+        DontDestroyOnLoad(musicplayer);
+
     }
     
     public void ChangeSceneinstructions()

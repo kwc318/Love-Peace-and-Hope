@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3f41e82ba83c341bd7dae83f7d6dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 10
+  timer: 9
   bg: {fileID: 484088268}
   start: {fileID: 2042327023}
   musicplayer: {fileID: 792795460}

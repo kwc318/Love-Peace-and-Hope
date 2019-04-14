@@ -301,7 +301,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eb12550c05cf3994bb6948c3c93a4691, type: 3}
-  m_Color: {r: 0.9725491, g: 0.3921569, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -319,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114165434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: -2.5, z: -1}
+  m_LocalPosition: {x: 6, y: -2.592, z: -1}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -342,6 +342,12 @@ MonoBehaviour:
   rsbutton: {fileID: 5751455617270018616, guid: ce30a999cf0ba384b846968af40721b0,
     type: 3}
   canvas: {fileID: 354437890}
+  yellow: {fileID: 21300000, guid: eb12550c05cf3994bb6948c3c93a4691, type: 3}
+  orange: {fileID: 21300000, guid: 17719291bcf62684aa7b0304403f8bd0, type: 3}
+  brown: {fileID: 21300000, guid: 40f3c461975997747bf5ba54388baaed, type: 3}
+  white: {fileID: 21300000, guid: 38b97dd87ecf16e4fbe1822813fd5c1c, type: 3}
+  black: {fileID: 21300000, guid: d977fcd47ade22b43a448f008cb2acef, type: 3}
+  p1: {fileID: 1632239419}
 --- !u!1 &138846730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1044,7 @@ MonoBehaviour:
   rgbd1: {fileID: 1632239416}
   Speed2: 0
   rgbd2: {fileID: 114165435}
-  timer: 2
+  timer: 5
   blocksprefab: {fileID: 616796802943461406, guid: 61580b7f45bf6a44cb0f9f10973ffebb,
     type: 3}
   beachprefab: {fileID: 3002798489748362089}
@@ -1582,7 +1588,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1068516247
 MonoBehaviour:
@@ -1633,8 +1639,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2283,7 +2289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632239414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: -2.5, z: -1}
+  m_LocalPosition: {x: -6, y: -2.592, z: -1}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2307,6 +2313,14 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 354437890}
   ctext: {fileID: 1068516245}
+  c: {fileID: 0}
+  p1s: {fileID: 0}
+  yellow: {fileID: 21300000, guid: eb12550c05cf3994bb6948c3c93a4691, type: 3}
+  orange: {fileID: 21300000, guid: 17719291bcf62684aa7b0304403f8bd0, type: 3}
+  brown: {fileID: 21300000, guid: 40f3c461975997747bf5ba54388baaed, type: 3}
+  white: {fileID: 21300000, guid: 38b97dd87ecf16e4fbe1822813fd5c1c, type: 3}
+  black: {fileID: 21300000, guid: d977fcd47ade22b43a448f008cb2acef, type: 3}
+  p2: {fileID: 114165439}
 --- !u!82 &1632239420
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2415,6 +2429,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199a6d77bd93f644697870c6d10ca2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yellow: {fileID: 0}
+  orange: {fileID: 0}
+  brown: {fileID: 0}
+  white: {fileID: 0}
+  black: {fileID: 0}
+  p1selected: 0
+  pselecttext: {fileID: 0}
+  selectsound: {fileID: 0}
+  fade: {fileID: 0}
+  canvas: {fileID: 0}
+  timer: 0
+  nextscene: 0
 --- !u!1 &1727847543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,7 +3182,7 @@ PrefabInstance:
     - target: {fileID: 5751455617270018616, guid: ce30a999cf0ba384b846968af40721b0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5751455617270018567, guid: ce30a999cf0ba384b846968af40721b0,
         type: 3}
@@ -3216,12 +3242,12 @@ PrefabInstance:
     - target: {fileID: 5751455617270018567, guid: ce30a999cf0ba384b846968af40721b0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5751455617270018567, guid: ce30a999cf0ba384b846968af40721b0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5751455617270018567, guid: ce30a999cf0ba384b846968af40721b0,
         type: 3}
