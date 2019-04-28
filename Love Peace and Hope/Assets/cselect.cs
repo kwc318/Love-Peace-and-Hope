@@ -31,8 +31,9 @@ public class cselect : MonoBehaviour
         //PlayerSelection1 = 6;
         p1selected = false;
         nextscene = false;
+        PlayerSelection1 = 0;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -68,6 +69,7 @@ public class cselect : MonoBehaviour
             if (timer <= 0)
             {
                 SceneManager.LoadScene(sceneName:"Gameplay");
+                Destroy(GameObject.Find("Music Manager"));
             }
         }
         

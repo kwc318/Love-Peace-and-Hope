@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
 using UnityEngine;
 using EZCameraShake;
 using TMPro;
@@ -42,12 +45,38 @@ public class GameManager : MonoBehaviour
     public AudioClip fifth;
     public AudioClip sixth;
     public AudioClip seventh;
+    public GameObject music;
     public bool win;
+    public bool r1;
+    public bool r2;
+    public bool r3;
+    public bool r1s;
+    public bool r2s;
+    public bool r3s;
+    public bool gameover;
+    public float round1timer;
+    public float wintimer;
+    public int p1rscore;
+    public int p2rscore;
+    public int roundno;
+    public GameObject star11;
+    public GameObject star12;
+    public GameObject star21;
+    public GameObject star22;
+    public GameObject rsbutton;
+    public GameObject chselectbutton;
+    public AudioSource cdbeep;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        roundno = 1;
+        r1s = false;
+        r2s = false;
+        r3s = false;
+        gameover = false;
         scorelength = 4;
         
         for (int i = 0; i <= 3; i++)
@@ -69,6 +98,8 @@ public class GameManager : MonoBehaviour
         win = false;
         
         Destroy(GameObject.Find("Music manager"));
+        //Destroy(GameObject.Find("Music Manager"));
+
 
 //        var trans = 0.5f;
 //        var color = p1flash.GetComponent<Renderer>().material.color;
@@ -90,10 +121,73 @@ public class GameManager : MonoBehaviour
     }
     
     void Update()
-    {        
+    {
+       if (p1rscore == 1)
+       {
+           star11.SetActive(true);
+       }
+       
+       if (p1rscore == 2)
+       {
+           star12.SetActive(true);
+       }
+
+       if (p2rscore == 1)
+       {
+           star21.SetActive(true);
+       }
+
+       if (p2rscore == 2)
+       {
+           star22.SetActive(true);
+       }
+        
+       if (roundno == 1)
+       {
+           r1 = true;
+       }
+       
+       else if (roundno == 2)
+       {
+           r1 = false;
+           r1s = false;
+           r2 = true;
+       }
+
+       if (p1rscore >= 2 || p2rscore >= 2)
+       {
+           win = true;
+           gameover = true;
+           gover();
+       }
+       
+       if (roundno == 3 && gameover == false)
+       {
+           r1 = false;
+           r1s = false;
+           r2 = false;
+           r2s = false;
+           r3 = true;
+       }
+        
+       if (r1 == true && r1s == false)
+       {
+            round1();
+       }
+       
+       if (r2 == true && r2s == false)
+       {
+           round2();    
+       }
+       
+       if (r3 == true && r3s == false)
+       {
+           round3();    
+       }
+        
        var sound = whoop.GetComponent<AudioClip>();
- 
-       timer -= Time.deltaTime;
+       
+       //timer -= Time.deltaTime;
        //CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
 
         
@@ -134,8 +228,10 @@ public class GameManager : MonoBehaviour
            rgbd2.AddForce(new Vector2(-Speed2, 0), ForceMode2D.Force);
        }
 
-       if (win == false)
+       if ((win == false && r1s == true) || (win == false && r2s == true) || (win == false && r3s == true)) 
        {
+           timer -= Time.deltaTime;
+
            if (Input.GetKeyDown(KeyCode.A))
            {
                Speed1 += 1;
@@ -219,6 +315,11 @@ public class GameManager : MonoBehaviour
            }
        }
 
+       if (win == true && gameover == false)
+       {
+           reset();
+       }
+
 //       if (p1score >= 130 || p2score >= 1300)
 //       {
 //           force = 12;
@@ -230,9 +331,117 @@ public class GameManager : MonoBehaviour
 //       }
     }
 
+
+    public void round1()
+    {
+        round1timer += Time.deltaTime;
+        if (round1timer >= 2)
+        {
+            Ctext.text = "Ready!";
+        }
+        
+        if (round1timer >= 3)
+        {
+            Ctext.text = "Get Set!";
+        }
+        
+        if (round1timer >= 4)
+        {
+            Ctext.text = "Hug!!!";
+            round1timer = 0;
+            r1s = true;
+        }
+        
+    }
+
+    public void round2()
+    {
+        round1timer += Time.deltaTime;
+
+        Ctext.text = "Round 2!";
+
+        if (round1timer >= 2)
+        {
+            Ctext.text = "Ready!";
+        }
+
+        if (round1timer >= 3)
+        {
+            Ctext.text = "Get Set!";
+        }
+
+        if (round1timer >= 4)
+        {
+            Ctext.text = "Hug!!!";
+            round1timer = 0;
+            r2s = true;
+        }
+    }
+    
+    public void round3()
+    {
+        round1timer += Time.deltaTime;
+
+        Ctext.text = "Final Round!";
+
+        if (round1timer >= 2)
+        {
+            Ctext.text = "Ready!";
+        }
+
+        if (round1timer >= 3)
+        {
+            Ctext.text = "Get Set!";
+        }
+
+        if (round1timer >= 4)
+        {
+            Ctext.text = "Hug!!!";
+            round1timer = 0;
+            r3s = true;
+        }
+    }
+
+
+    public void reset()
+    {
+        wintimer += Time.deltaTime;
+        
+        if (wintimer >= 2)
+        {
+            Ctext.text = "";
+            p1score = 0;
+            p2score = 0;
+            Speed1 = 0;
+            Speed2 = 0;
+            force = 0.5f;
+            timer = 5;
+            wintimer = 0;
+            p1.transform.position = new Vector3(-6.0f, -2.59f, -1.0f);
+            p2.transform.position = new Vector3(6.0f, -2.59f, -1.0f);
+            p1.transform.rotation = Quaternion.Euler(0, 0, 0);;
+            p2.transform.rotation = Quaternion.Euler(0, 0, 0);;
+            roundno += 1;
+            win = false;
+        }
+    }
+    
+    public void gover()
+    {
+        rsbutton.SetActive(true);
+        chselectbutton.SetActive(true);
+    }
+    
     public void restart()
     {
         SceneManager.LoadScene(sceneName:"Gameplay");
+
     }
     
+    public void characterselect()
+    {
+        SceneManager.LoadScene(sceneName:"Character Select");
+        DontDestroyOnLoad(music);
+    }
+
 }

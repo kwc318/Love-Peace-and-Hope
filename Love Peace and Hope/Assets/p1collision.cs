@@ -7,7 +7,9 @@ public class p1collision : MonoBehaviour
     public GameManager GM;
     public AudioSource yay;
     public GameObject rsbutton;
+    public GameObject chselectbutton;
     public Transform buttonpos;
+    public Transform chbuttonpos;
     public Canvas canvas;
     public GameObject ctext;
     public cselect c;
@@ -66,10 +68,15 @@ public class p1collision : MonoBehaviour
                 GM.win = true;
                 GM.Ctext.text = p2.GetComponent<SpriteRenderer>().sprite.name.ToString() + " Has More Hug Power!";
                 yay.Play();
-                GameObject rspawn = Instantiate(rsbutton, buttonpos.position, Quaternion.identity);
-                rspawn.transform.SetParent(canvas.transform);
+//                GameObject rspawn = Instantiate(rsbutton, buttonpos.position, Quaternion.identity);
+//                GameObject chselect = Instantiate(chselectbutton, chbuttonpos.position, Quaternion.identity);
+//                rspawn.transform.SetParent(canvas.transform);
+//                chselect.transform.SetParent(canvas.transform);
+                //rsbutton.SetActive(true);
+                //chselectbutton.SetActive(true);
                 GM.Speed1 = 0;
                 GM.Speed2 = 1;
+                GM.p2rscore += 1;
             }
         }
 //        if (collision.gameObject.name == "Left Barrier")
