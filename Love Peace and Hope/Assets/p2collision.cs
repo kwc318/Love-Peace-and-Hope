@@ -73,6 +73,10 @@ public class p2collision : MonoBehaviour
                 GM.Speed2 = 0;
                 GetComponent<SpriteRenderer>().sprite.name.ToString();
                 GM.p1rscore += 1;
+                if (GM.p1rscore == 2)
+                {
+                    GameManager.P1score += 1;
+                }
 
             }
         }

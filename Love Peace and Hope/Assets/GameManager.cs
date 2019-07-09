@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI p1s;
     public TextMeshProUGUI p2s;
     public TextMeshProUGUI Ctext;
+    public TextMeshProUGUI p1st;
+    public TextMeshProUGUI p2st;
     public int scorelength;
     public GameObject p1flash;
     public GameObject p2flash;
@@ -66,6 +68,8 @@ public class GameManager : MonoBehaviour
     public GameObject rsbutton;
     public GameObject chselectbutton;
     public AudioSource cdbeep;
+    public static int P1score;
+    public static int P2score;
 
 
 
@@ -78,6 +82,9 @@ public class GameManager : MonoBehaviour
         r3s = false;
         gameover = false;
         scorelength = 4;
+        //P1score = 0;
+        //P2score = 0;
+
         
         for (int i = 0; i <= 3; i++)
 			
@@ -122,6 +129,10 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+        
+        Debug.Log(P1score);
+
+        
        if (p1rscore == 1)
        {
            star11.SetActive(true);
@@ -130,6 +141,12 @@ public class GameManager : MonoBehaviour
        if (p1rscore == 2)
        {
            star12.SetActive(true);
+          //P1score += 1;
+           Debug.Log(P1score);
+           Debug.Log(P2score);
+           p1st.text = "Player 1 score =" + P1score;
+           p2st.text = "Player 2 score =" + P2score;
+
        }
 
        if (p2rscore == 1)
@@ -140,6 +157,13 @@ public class GameManager : MonoBehaviour
        if (p2rscore == 2)
        {
            star22.SetActive(true);
+           //P2score += 1;
+           Debug.Log(P2score);
+           Debug.Log(P1score);
+           p2st.text = "Player 2 score =" + P2score;
+           p1st.text = "Player 1 score =" + P1score;
+
+
        }
         
        if (roundno == 1)
@@ -236,7 +260,7 @@ public class GameManager : MonoBehaviour
            {
                Speed1 += 1;
                p1score += 1;
-               Debug.Log(Speed1);
+               //Debug.Log(Speed1);
                CameraShaker.Instance.ShakeOnce(force, 4f, 0.1f, 1f);
                //p1flash.GetComponent<Renderer> ().material.color.a = 0;
                p1flash.GetComponent<Animator>().Play("flahs");
@@ -262,7 +286,7 @@ public class GameManager : MonoBehaviour
            {
                Speed2 += 1;
                p2score += 1;
-               Debug.Log(Speed2);
+               //Debug.Log(Speed2);
                CameraShaker.Instance.ShakeOnce(force, 4f, 0.1f, 1f);
                p2flash.GetComponent<Animator>().Play("flahs");
                whoop.Play();

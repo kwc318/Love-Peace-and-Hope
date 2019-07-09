@@ -77,6 +77,11 @@ public class p1collision : MonoBehaviour
                 GM.Speed1 = 0;
                 GM.Speed2 = 1;
                 GM.p2rscore += 1;
+                if (GM.p2rscore == 2)
+                {
+                    GameManager.P2score += 1;
+                }
+                
             }
         }
 //        if (collision.gameObject.name == "Left Barrier")
